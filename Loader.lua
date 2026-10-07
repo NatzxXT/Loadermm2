@@ -5,7 +5,7 @@
 print("🚀 Iniciando YARHM...")
 
 -- 1. Carrega o HUD (Repositório A)
-local urlHUD = "https://raw.githubusercontent.com/NatzzXT/HUDmm2/main/HUD.lua"
+local urlHUD = "https://raw.githubusercontent.com/NatzzXT/HUDmm2/main/HUD.md"
 local sucessoHUD, erroHUD = pcall(function()
     loadstring(game:HttpGet(urlHUD))()
 end)
@@ -23,7 +23,7 @@ print("✅ HUD carregado. Aguardando a interface aparecer...")
 task.wait(3) 
 
 -- 4. Carrega as Funções (Repositório B)
-local urlFuncoes = "https://raw.githubusercontent.com/NatzzXT/Funcoesmm2/main/Funcoes.lua"
+local urlFuncoes = "https://raw.githubusercontent.com/NatzzXT/Funcoesmm2/main/Funcoes.md"
 local sucessoFuncoes, erroFuncoes = pcall(function()
     loadstring(game:HttpGet(urlFuncoes))()
 end)
