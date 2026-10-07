@@ -1,11 +1,23 @@
 -- ==========================================
--- YARHM LOADER (Executa o HUD e as Funções)
+-- YARHM LOADER ANTI-COREGUI (Para Xeno)
 -- ==========================================
 
-print("🚀 Iniciando YARHM...")
+print("🚀 Iniciando YARHM (Modo Xeno)...")
 
--- 1. Carrega o HUD (Repositório A)
-local urlHUD = "https://raw.githubusercontent.com/NatzzXT/HUDmm2/main/HUD.md"
+-- 1. O TRUQUE PARA O XENO: Força o Xeno a usar o PlayerGui em vez do CoreGui
+if getgenv().gethui then
+    getgenv().gethui = function() 
+        return game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui") 
+    end
+end
+if getgenv().get_hidden_gui then
+    getgenv().get_hidden_gui = function() 
+        return game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui") 
+    end
+end
+
+-- 2. Carrega o HUD (Repositório A)
+local urlHUD = "https://raw.githubusercontent.com/NatzzXT/HUDmm2/main/HUD.lua"
 local sucessoHUD, erroHUD = pcall(function()
     loadstring(game:HttpGet(urlHUD))()
 end)
@@ -15,15 +27,15 @@ if not sucessoHUD then
     return
 end
 
--- 2. Espera o HUD criar o menu na tela
+-- 3. Espera o HUD criar o menu na tela
 repeat task.wait() until getgenv().YARHM
 print("✅ HUD carregado. Aguardando a interface aparecer...")
 
--- 3. Dá um tempo para o menu animar e ficar pronto
-task.wait(3) 
+-- 4. Dá um tempo maior para o Xeno processar tudo
+task.wait(5) 
 
--- 4. Carrega as Funções (Repositório B)
-local urlFuncoes = "https://raw.githubusercontent.com/NatzzXT/Funcoesmm2/main/Funcoes.md"
+-- 5. Carrega as Funções (Repositório B)
+local urlFuncoes = "https://raw.githubusercontent.com/NatzzXT/Funcoesmm2/main/Funcoes.lua"
 local sucessoFuncoes, erroFuncoes = pcall(function()
     loadstring(game:HttpGet(urlFuncoes))()
 end)
@@ -33,4 +45,4 @@ if not sucessoFuncoes then
     return
 end
 
-print("🚀 YARHM carregado com sucesso usando o Loader!")
+print("🚀 YARHM carregado com sucesso no Xeno!")
