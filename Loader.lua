@@ -26,7 +26,7 @@ if not loadstring then
 end
 
 -- 2. Carrega o HUD (Repositório A)
-local urlHUD = "https://raw.githubusercontent.com/NatzzXT/HUDmm2/main/HUD.lua"
+local urlHUD = "https://raw.githubusercontent.com/NatzxXT/HUDmm2/refs/heads/main/HUD.lua"
 print("📥 Baixando HUD...")
 
 local hudCode = game:HttpGet(urlHUD)
@@ -54,7 +54,7 @@ print("✅ HUD carregado. Aguardando a interface aparecer...")
 task.wait(3) 
 
 -- 5. Carrega as Funções (Repositório B)
-local urlFuncoes = "https://raw.githubusercontent.com/NatzzXT/Funcoesmm2/main/Funcoes.lua"
+local urlFuncoes = "https://raw.githubusercontent.com/NatzxXT/Funcoesmm2/refs/heads/main/Funcoes.lua"
 print("📥 Baixando Funções...")
 
 local funcoesCode = game:HttpGet(urlFuncoes)
