@@ -1,5 +1,14 @@
 -- ==========================================
--- YARHM LOADER (Diagnóstico e Execução)
+-- CORREÇÃO DE COMPATIBILIDADE PARA EXECUTORES ANTIGOS (Yub-X, Xeno, etc.)
+-- ==========================================
+pcall(function()
+    if not Enum.ScreenInsets then
+        Enum.ScreenInsets = { DeviceSafeInsets = "DeviceSafeInsets", None = "None" }
+    end
+    if not Enum.SafeAreaCompatibility then
+        Enum.SafeAreaCompatibility = { None = "None", FullscreenExtension = "FullscreenExtension" }
+    end
+end)
 -- ==========================================
 
 print("🚀 Iniciando YARHM...")
