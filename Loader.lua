@@ -1,6 +1,10 @@
 -- ==========================================
--- CORREÇÃO DE COMPATIBILIDADE PARA EXECUTORES ANTIGOS (Yub-X, Xeno, etc.)
+-- YARHM LOADER CORRIGIDO (Compatibilidade Yub-X)
 -- ==========================================
+
+print("🚀 Iniciando YARHM...")
+
+-- CORREÇÃO PARA EXECUTORES ANTIGOS (Yub-X, Xeno)
 pcall(function()
     if not Enum.ScreenInsets then
         Enum.ScreenInsets = { DeviceSafeInsets = "DeviceSafeInsets", None = "None" }
@@ -9,14 +13,10 @@ pcall(function()
         Enum.SafeAreaCompatibility = { None = "None", FullscreenExtension = "FullscreenExtension" }
     end
 end)
--- ==========================================
-
-print("🚀 Iniciando YARHM...")
 
 -- 1. TESTE DE SUPORTE DO EXECUTOR
 if not game.HttpGet then
     warn("❌ ERRO FATAL: Seu executor NÃO suporta a função 'game:HttpGet'.")
-    warn("Tente usar o Solara, Wave ou Delta. O Xeno não funciona para isso.")
     return
 end
 
@@ -25,14 +25,14 @@ if not loadstring then
     return
 end
 
--- 2. Carrega o HUD (Repositório A)
-local urlHUD = "https://raw.githubusercontent.com/NatzxXT/HUDmm2/refs/heads/main/HUD.lua"
+-- 2. Carrega o HUD (Repositório A) - USANDO LINK CURTO
+local urlHUD = "https://raw.githubusercontent.com/NatzxXT/HUDmm2/main/HUD.lua"
 print("📥 Baixando HUD...")
 
 local hudCode = game:HttpGet(urlHUD)
 
 if not hudCode or hudCode == "" or string.find(hudCode, "404: Not Found") then
-    warn("❌ ERRO: Não foi possível baixar o HUD. Verifique se o link está correto e se o arquivo se chama HUD.lua no GitHub!")
+    warn("❌ ERRO: Não foi possível baixar o HUD. Verifique se você clicou em 'Commit changes' no GitHub!")
     return
 end
 
@@ -47,20 +47,29 @@ if not sucessoHUD then
 end
 
 -- 3. Espera o HUD criar o menu na tela
-repeat task.wait() until getgenv().YARHM
-print("✅ HUD carregado. Aguardando a interface aparecer...")
+print("⏳ Aguardando a interface do HUD aparecer...")
+local tentativas = 0
+repeat 
+    task.wait(0.5)
+    tentativas = tentativas + 1
+until getgenv().YARHM or tentativas > 20
 
--- 4. Dá um tempo para o menu animar
-task.wait(3) 
+if not getgenv().YARHM then
+    warn("❌ ERRO: O HUD não criou a variável 'getgenv().YARHM'. O Yub-X pode não ter memória suficiente para carregar o HUD.")
+    return
+end
 
--- 5. Carrega as Funções (Repositório B)
-local urlFuncoes = "https://raw.githubusercontent.com/NatzxXT/Funcoesmm2/refs/heads/main/Funcoes.lua"
+print("✅ HUD carregado e interface visível!")
+task.wait(3)
+
+-- 4. Carrega as Funções (Repositório B) - USANDO LINK CURTO
+local urlFuncoes = "https://raw.githubusercontent.com/NatzxXT/Funcoesmm2/main/Funcoes.lua"
 print("📥 Baixando Funções...")
 
 local funcoesCode = game:HttpGet(urlFuncoes)
 
 if not funcoesCode or funcoesCode == "" or string.find(funcoesCode, "404: Not Found") then
-    warn("❌ ERRO: Não foi possível baixar as Funções. Verifique se o link está correto e se o arquivo se chama Funcoes.lua no GitHub!")
+    warn("❌ ERRO: Não foi possível baixar as Funções. Verifique o GitHub.")
     return
 end
 
